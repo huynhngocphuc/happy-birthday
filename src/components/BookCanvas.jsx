@@ -29,13 +29,13 @@ const BookCanvas = ({ active, setActive }) => {
                 <div className="card1">
                     <div className="cover-text-wrapper">
                         <h4 className="username">
-                            Dear Trisha<span className="underline"></span>
+                            {/* Dear Trisha<span className="underline"></span> */}
                         </h4>
                         <h3 className="cover-title">
                             Happy Birthday!
                         </h3>
                         <p className="cover-subtitle">
-                            A purr-fect message just for you... 💌
+                            Lời chúc ngọt ngào cho em bé... 💌
                         </p>
                     </div>
 
@@ -63,16 +63,17 @@ const BookCanvas = ({ active, setActive }) => {
                 <div className="card2">
                     <div className="card2-content">
                         <h3 className="card2-recipient">
-                            To You!
+                            Lời chúc ngọt ngào đến em
                         </h3>
 
                         {/* Swapping back to H2 to match the original CSS targeting */}
                         <div className="card2-message-text italic">
-                            <article style={{ marginBottom: '8px' }}>Happy Birthday, Trisha ❤️</article>
-                            <article style={{ marginBottom: '10px' }}>From the moment we met, something in my life shifted—like the universe quietly guiding me toward someone meant for me.You brought warmth into the parts of me I didn’t even know were cold, And you expanded my days with a dimension I can only call my own.</article>
-                            <article style={{ marginBottom: '10px' }}>On your birthday, I just want you to know this: I want you with me in every chapter, every storm, every sunshine, every tomorrow. No matter what comes, I’ll be on your side—always. I’ll choose you, protect you, stand with you, and love you in ways that remind you you’re never alone.</article>
-                            <article style={{ marginBottom: '10px' }}>You’re not just another year older today… <br />
-                                you’re the reason my life feels softer, brighter, and endlessly worth living. Happy Birthday.</article>
+                            <article style={{ marginBottom: '8px' }}>Chúc mừng sinh nhật em ❤️</article>
+                            <article style={{ marginBottom: '10px' }}>Anh chẳng biết phép màu nào đã đưa chúng ta đến với nhau giữa thế giới rộng lớn này, nhưng anh luôn thấy mình thật may mắn vì đã gặp được em. </article>
+                            <article style={{ marginBottom: '10px' }}>Tuổi mới, anh chúc em luôn rạng rỡ, luôn luôn xinh đẹp theo cách rất riêng của em và giữ mãi nụ cười hồn nhiên ấy. Chúc em tuổi mới tràn ngập niềm vui, đầy năng lượng, nhiều may mắn và được bao bọc bởi thật nhiều yêu thương.</article>
+                            <article style={{ marginBottom: '10px' }}>Hôm nay là sinh nhật em, nhưng chúng ta lại chưa thể ở cạnh nhau. Anh tin rằng khoảng cách là thử thách của 2 đứa mình làm cho tình yêu mình thêm vững vàng. Chúng mình cùng vượt qua thử thách này nhé. Cứ vững tin bước tiếp, anh sẽ luôn đồng hành cùng em, cùng cố gắng đến ngày chúng mình được bên cạnh nhau, để cùng nhau làm những điều mình mong muốn và chạm tới những ước mơ của hai đứa.</article>
+                            <article style={{ marginBottom: '10px' }}>Tuổi mới thật rực rỡ nhé! </article>
+                            <article style={{ marginBottom: '10px' }}>Happy Birthday, my love 💕</article>
                         </div>
 
                         <div className="card2-decoration"></div> {/* Decoration */}
@@ -91,7 +92,7 @@ const BookCanvas = ({ active, setActive }) => {
                         <div className="confetti-dots"></div>
 
                         <p className="signature">
-                            Your Best Friend, Rexon
+                            Anh.
                         </p>
                     </div>
                 </div>

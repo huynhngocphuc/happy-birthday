@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import './LoveLetter.css'
 import './BookCanvas.css'
+import './ImageSlider.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router'
 import Layout from './layout/Layout'
 import Home from './pages/Home'
@@ -29,9 +30,9 @@ const App = () => {
 
   useEffect(() => {
     const handlePageLoad = () => {
-      setTimeout(() => setAnimateOut(true), 8400);
-      setTimeout(() => setLoading(false), 9000);
-      setTimeout(() => setShowContent(true), 8600);
+      // setTimeout(() => setAnimateOut(true), 8400);
+      // setTimeout(() => setLoading(false), 9000);
+      setTimeout(() => setShowContent(true), 0);
     };
 
     if (document.readyState === "complete") {
@@ -45,9 +46,9 @@ const App = () => {
 
   return (
     <>
-      {
+      {/* {
         loading && <OpeningAnimation animateOut={animateOut}/>
-      }
+      } */}
       {
         showContent && <RouterProvider router={MyRoute} />
       }

@@ -24,7 +24,7 @@ const getImageArrayWithAspect = async () => {
 const generateRowImages = async () => {
     const imageArray = await getImageArrayWithAspect()
     const sizes = ['', 'medium', 'small', 'large']
-    
+
     const createRow = (count) => {
         const images = []
         for (let i = 0; i < count; i++) {
@@ -157,82 +157,35 @@ const ImageSlider = ({ visible, onClose }) => {
     if (!visible || !rowImages) return null
 
     return (
-        <div 
+        <div
             ref={containerRef}
             className={`image-slider-container ${visible ? 'visible' : ''}`}
         >
             <div className="slider-overlay"></div>
-            
+
             <button className="slider-close-btn" onClick={onClose}>
                 <GiCrossMark />
             </button>
 
             <div className="slider-tracks-wrapper">
-                {/* Row 1 */}
-                <div className="slider-track row-1">
-                    {rowImages.row1.map((image, index) => (
-                        <div
-                            key={`r1-${index}`}
-                            className={`slider-item ${image.shape} ${image.size}`}
-                            style={{ backgroundImage: `url(${image.src})`, ...image.style }}
-                        />
-                    ))}
-                </div>
-
-                {/* Row 2 */}
-                <div className="slider-track row-2">
-                    {rowImages.row2.map((image, index) => (
-                        <div
-                            key={`r2-${index}`}
-                            className={`slider-item ${image.shape} ${image.size}`}
-                            style={{ backgroundImage: `url(${image.src})`, ...image.style }}
-                        />
-                    ))}
-                </div>
-
-                {/* Row 3 */}
-                <div className="slider-track row-3">
-                    {rowImages.row3.map((image, index) => (
-                        <div
-                            key={`r3-${index}`}
-                            className={`slider-item ${image.shape} ${image.size}`}
-                            style={{ backgroundImage: `url(${image.src})`, ...image.style }}
-                        />
-                    ))}
-                </div>
-
-                {/* Row 4 */}
-                <div className="slider-track row-4">
-                    {rowImages.row4.map((image, index) => (
-                        <div
-                            key={`r4-${index}`}
-                            className={`slider-item ${image.shape} ${image.size}`}
-                            style={{ backgroundImage: `url(${image.src})`, ...image.style }}
-                        />
-                    ))}
-                </div>
-
-                {/* Row 5 */}
-                <div className="slider-track row-5">
-                    {rowImages.row5.map((image, index) => (
-                        <div
-                            key={`r5-${index}`}
-                            className={`slider-item ${image.shape} ${image.size}`}
-                            style={{ backgroundImage: `url(${image.src})`, ...image.style }}
-                        />
-                    ))}
-                </div>
-
-                {/* Row 6 */}
-                <div className="slider-track row-6">
-                    {rowImages.row6.map((image, index) => (
-                        <div
-                            key={`r6-${index}`}
-                            className={`slider-item ${image.shape} ${image.size}`}
-                            style={{ backgroundImage: `url(${image.src})`, ...image.style }}
-                        />
-                    ))}
-                </div>
+                {[1, 2, 3, 4, 5, 6].map(rowNum => (
+                    <div key={`row-${rowNum}`} className={`slider-track row-${rowNum}`}>
+                        {rowImages[`row${rowNum}`].map((image, index) => (
+                            <div
+                                key={`r${rowNum}-${index}`}
+                                className={`slider-item ${image.shape} ${image.size}`}
+                                style={image.style}
+                            >
+                                <img
+                                    src={image.src}
+                                    alt=""
+                                    loading="lazy"
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ))}
             </div>
         </div>
     )

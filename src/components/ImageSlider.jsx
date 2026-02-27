@@ -2,32 +2,46 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../ImageSlider.css'
 import { GiCrossMark } from 'react-icons/gi'
 
-// Get array of image paths
-const getImageArray = () => {
+// Get array of image paths and their aspect ratios
+const getImageArrayWithAspect = async () => {
     const images = import.meta.glob('../assets/img_fly/*.jpg', { eager: true })
-    return Object.values(images).map(m => m.default).sort()
+    const imagePaths = Object.values(images).map(m => m.default).sort()
+    // Load all images and get their aspect ratios
+    const promises = imagePaths.map(src => {
+        return new Promise(resolve => {
+            const img = new window.Image()
+            img.onload = () => {
+                resolve({ src, aspect: img.naturalWidth / img.naturalHeight })
+            }
+            img.onerror = () => resolve({ src, aspect: 1 }) // fallback
+            img.src = src
+        })
+    })
+    return Promise.all(promises)
 }
 
 // Generate images outside of component to avoid impure function calls during render
-const generateRowImages = () => {
-    const imageArray = getImageArray()
-    const shapes = ['rect-v', 'rect-h']
+const generateRowImages = async () => {
+    const imageArray = await getImageArrayWithAspect()
     const sizes = ['', 'medium', 'small', 'large']
     
     const createRow = (count) => {
         const images = []
         for (let i = 0; i < count; i++) {
-            const shape = shapes[Math.floor(Math.random() * shapes.length)]
+            const imgObj = imageArray[Math.floor(Math.random() * imageArray.length)]
+            const aspect = imgObj.aspect
+            let shape = 'rect-v'
+            if (aspect > 1.1) shape = 'rect-h'
+            else if (aspect < 0.9) shape = 'rect-v'
+            else shape = Math.random() > 0.5 ? 'rect-v' : 'rect-h'
             const size = sizes[Math.floor(Math.random() * sizes.length)]
-            const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)]
-            // More random positioning for overlapping effect
             const marginLeft = Math.floor(Math.random() * 60) - 20 // -20 to 40px
             const marginRight = Math.floor(Math.random() * 50) - 10 // -10 to 40px
             const translateY = Math.floor(Math.random() * 80) - 40 // -40 to 40px
             const rotate = Math.floor(Math.random() * 30) - 15 // -15 to 15deg
             const scale = 0.8 + Math.random() * 0.4 // 0.8 to 1.2
             images.push({
-                src: randomImage,
+                src: imgObj.src,
                 shape: shape,
                 size: size,
                 style: {
@@ -52,11 +66,15 @@ const generateRowImages = () => {
 
 const ImageSlider = ({ visible, onClose }) => {
     const containerRef = useRef(null)
-    const [rowImages] = useState(() => generateRowImages())
+    const [rowImages, setRowImages] = useState(null)
+
+    useEffect(() => {
+        generateRowImages().then(setRowImages)
+    }, [])
 
     // Create floating hearts effect
     useEffect(() => {
-        if (!visible) return
+        if (!visible || !rowImages) return
 
         const heartEmojis = ['❤️', '💖', '💕', '💗', '💓', '🩷']
         const heartClasses = ['heart-pink', 'heart-red', 'heart-light']
@@ -123,11 +141,11 @@ const ImageSlider = ({ visible, onClose }) => {
             // Clean up any remaining hearts
             document.querySelectorAll('.floating-heart, .floating-heart-side').forEach(heart => heart.remove())
         }
-    }, [visible])
+    }, [visible, rowImages])
 
     // Auto-close after 30 seconds
     useEffect(() => {
-        if (!visible) return
+        if (!visible || !rowImages) return
 
         const autoCloseTimer = setTimeout(() => {
             onClose()
@@ -136,7 +154,7 @@ const ImageSlider = ({ visible, onClose }) => {
         return () => clearTimeout(autoCloseTimer)
     }, [visible, onClose])
 
-    if (!visible) return null
+    if (!visible || !rowImages) return null
 
     return (
         <div 

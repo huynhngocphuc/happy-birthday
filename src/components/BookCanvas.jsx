@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import orihime from '../assets/orihime.jpg'
+import orihime from '../assets/1.jpg'
 import { GiCrossMark } from 'react-icons/gi'
 
 const BookCanvas = ({ active, setActive }) => {
@@ -29,13 +29,13 @@ const BookCanvas = ({ active, setActive }) => {
                 <div className="card1">
                     <div className="cover-text-wrapper">
                         <h4 className="username">
-                            {/* Dear Trisha<span className="underline"></span> */}
+                            Dear Pé<span className="underline"></span>
                         </h4>
                         <h3 className="cover-title">
                             Happy Birthday!
                         </h3>
                         <p className="cover-subtitle">
-                            Lời chúc ngọt ngào cho em bé... 💌
+                            Mở ra đọc lời chúc từ tận đáy lòng nè... 💌
                         </p>
                     </div>
 
@@ -63,17 +63,16 @@ const BookCanvas = ({ active, setActive }) => {
                 <div className="card2">
                     <div className="card2-content">
                         <h3 className="card2-recipient">
-                            Lời chúc ngọt ngào đến em
+                            To You!
                         </h3>
 
                         {/* Swapping back to H2 to match the original CSS targeting */}
                         <div className="card2-message-text italic">
-                            <article style={{ marginBottom: '8px' }}>Chúc mừng sinh nhật em ❤️</article>
-                            <article style={{ marginBottom: '10px' }}>Anh chẳng biết phép màu nào đã đưa chúng ta đến với nhau giữa thế giới rộng lớn này, nhưng anh luôn thấy mình thật may mắn vì đã gặp được em. </article>
-                            <article style={{ marginBottom: '10px' }}>Tuổi mới, anh chúc em luôn rạng rỡ, luôn luôn xinh đẹp theo cách rất riêng của em và giữ mãi nụ cười hồn nhiên ấy. Chúc em tuổi mới tràn ngập niềm vui, đầy năng lượng, nhiều may mắn và được bao bọc bởi thật nhiều yêu thương.</article>
-                            <article style={{ marginBottom: '10px' }}>Hôm nay là sinh nhật em, nhưng chúng ta lại chưa thể ở cạnh nhau. Anh tin rằng khoảng cách là thử thách của 2 đứa mình làm cho tình yêu mình thêm vững vàng. Chúng mình cùng vượt qua thử thách này nhé. Cứ vững tin bước tiếp, anh sẽ luôn đồng hành cùng em, cùng cố gắng đến ngày chúng mình được bên cạnh nhau, để cùng nhau làm những điều mình mong muốn và chạm tới những ước mơ của hai đứa.</article>
-                            <article style={{ marginBottom: '10px' }}>Tuổi mới thật rực rỡ nhé! </article>
-                            <article style={{ marginBottom: '10px' }}>Happy Birthday, my love 💕</article>
+                            <article style={{ marginBottom: '8px' }}>Chúc mừng sinh nhật, EM ❤️</article>
+                            <article style={{ marginBottom: '10px' }}>Từ khoảnh khắc chúng ta gặp nhau, cuộc sống của anh như đổi khác—như thể vũ trụ lặng lẽ dẫn anh đến đúng người dành cho mình. Em mang hơi ấm đến những góc trong anh mà chính anh cũng không biết đã từng lạnh, và khiến từng ngày của anh trở nên ý nghĩa theo một cách rất riêng.</article>
+                            <article style={{ marginBottom: '10px' }}>Trong ngày sinh nhật của em, anh chỉ muốn em biết điều này: anh muốn có em trong mọi chương đời, mọi giông bão, mọi nắng ấm, và mọi ngày mai. Dù chuyện gì xảy ra, anh vẫn sẽ luôn ở bên em. Anh sẽ chọn em, bảo vệ em, đồng hành cùng em, và yêu em theo cách khiến em luôn nhớ rằng em không hề cô đơn.</article>
+                            <article style={{ marginBottom: '10px' }}>Hôm nay em không chỉ thêm một tuổi mới… <br />
+                                em còn là lý do khiến cuộc sống của anh dịu dàng hơn, rực rỡ hơn, và đáng sống đến vô cùng. Chúc mừng sinh nhật em.</article>
                         </div>
 
                         <div className="card2-decoration"></div> {/* Decoration */}
@@ -92,7 +91,7 @@ const BookCanvas = ({ active, setActive }) => {
                         <div className="confetti-dots"></div>
 
                         <p className="signature">
-                            Anh.
+                            From, Anh Người Iu :vv
                         </p>
                     </div>
                 </div>

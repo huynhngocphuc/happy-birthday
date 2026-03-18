@@ -6,38 +6,19 @@ import decorate from '../assets/decorate.png'
 import decoFlowers from '../assets/decorate_flower.png'
 import hat from '../assets/hat.png'
 import smileIcon from '../assets/smiley_icon.png'
+import nhachpbd from '../assets/nhachpbd.mp3'
 import { Link } from "react-router";
 import BookCanvas from "../components/BookCanvas";
 import SmallLetter from "../components/SmallLetter";
-import ImageSlider from "../components/ImageSlider";
-import orihime from "../assets/orihime.jpg";
+import orihime from "../assets/1.jpg";
 
 const Home = () => {
     // ------------------- Hooks 
     const [Active, SetActive] = useState(true)
-    const [showSlider, setShowSlider] = useState(false)
-    const [hasOpenedCard, setHasOpenedCard] = useState(false)
-
-    // Track when card is opened
-    useEffect(() => {
-        if (!Active) {
-            setHasOpenedCard(true)
-        }
-    }, [Active])
-
-    // Show slider when card is closed after being opened
-    useEffect(() => {
-        if (Active && hasOpenedCard) {
-            // Small delay before showing slider
-            const timer = setTimeout(() => {
-                setShowSlider(true)
-            }, 300)
-            return () => clearTimeout(timer)
-        }
-    }, [Active, hasOpenedCard])
+    const audioRef = React.useRef(null)
 
     useEffect(() => {
-        let datetxt = "28 February";
+        let datetxt = "25 tháng 04";
         let charArrDate = datetxt.split('');
         let currentIndex = 0;
         let date__of__birth = document.querySelector(".date__of__birth span");
@@ -68,10 +49,36 @@ const Home = () => {
         }, 12000);
     }, []);
 
+    useEffect(() => {
+        const audioEl = audioRef.current;
+        if (!audioEl) return;
+
+        const playAudio = () => {
+            audioEl.play().catch(() => { });
+        };
+
+        playAudio();
+
+        const keepPlaying = () => {
+            if (audioEl.paused) playAudio();
+        };
+
+        audioEl.addEventListener("pause", keepPlaying);
+        document.addEventListener("click", playAudio, { once: true });
+        document.addEventListener("touchstart", playAudio, { once: true });
+
+        return () => {
+            audioEl.removeEventListener("pause", keepPlaying);
+            document.removeEventListener("click", playAudio);
+            document.removeEventListener("touchstart", playAudio);
+        };
+    }, []);
+
 
     return (
         <>
             <div id="wrapper">
+                <audio ref={audioRef} src={nhachpbd} autoPlay loop preload="auto" />
                 <div className="flag__birthday">
                     <img src={png} alt="" width="350" className="flag__left" />
                     <img src={png} alt="" width="350" className="flag__right" />
@@ -113,7 +120,7 @@ const Home = () => {
                                         <path fill="#d13852" d="M63.841 18.646c-.246-3.85-1.072-6.977-3.752-10.198c-5.369-6.439-17.71-7.511-23.23-1.312c-.963.912-1.872 2.01-2.785 3.322l-2.066 2.969l-2.067-2.969c-.916-1.312-1.827-2.411-2.79-3.322C21.627.937 9.287 2.008 3.921 8.448C1.237 11.669.412 14.796.166 18.646C-.184 30.092 8.122 39.257 9.147 40.6c5.637 6.613 11.786 12.866 18.03 18.627c1.13.989 2.106 1.812 3.082 2.628c.587.479 1.166.964 1.749 1.44c.582-.477 1.159-.961 1.743-1.44c.98-.816 1.956-1.639 3.082-2.628c6.247-5.761 12.397-12.01 18.04-18.627c1.025-1.343 9.332-10.508 8.979-21.954" />
                                         <path fill="#f1a5b1" d="M60.39 16.604a10.1 10.1 0 0 0-.457-2.909a9 9 0 0 0-1.169-2.42c-2.973-4.369-9.451-5.943-14.863-4.837c-2.111.508-4.225 1.302-5.197 3.318c-.331.865.365 1.281 1.44 1.228c3.894-.435 8.202-.043 11.645 1.63c.858.42 1.661.918 2.395 1.503c2.47 1.913 3.537 4.887 4.02 7.837c1.201-.242 1.854-1.683 2.01-2.965a10.5 10.5 0 0 0 .177-2.385" />
                                     </svg>
-                                    Click Here
+                                    Bấm vào đây đêee
                                 </div>
                             </button>
                         </div>
@@ -123,6 +130,11 @@ const Home = () => {
                         <div className="box__account">
                             <div className="image">
                                 <img src={orihime} alt="" />
+                            </div>
+                            <div className="name">
+                                <i className="fa-solid fa-heart"></i>
+                                <span>Dear Pé</span>
+                                <i className="fa-solid fa-heart"></i>
                             </div>
                             <div className="balloon_one">
                                 <img width="100px" src={ballon1} alt="" />
@@ -178,16 +190,10 @@ const Home = () => {
                 <BookCanvas active={Active} setActive={SetActive} />
 
                 {/* ========================== Small letter from rajib ========================= */}
-                {/* <section className="smallLetter absolute md:-bottom-26 -bottom-40 md:left-[45%] left-[50%] -translate-x-1/2" style={{ "--t": "15.6s" }}>
+                <section className="smallLetter absolute md:-bottom-26 -bottom-40 md:left-[45%] left-[50%] -translate-x-1/2" style={{ "--t": "15.6s" }}>
                     <SmallLetter />
-                </section> */}
+                </section>
             </div>
-
-            {/* ========================== Image Slider ========================= */}
-            <ImageSlider 
-                visible={showSlider} 
-                onClose={() => setShowSlider(false)} 
-            />
         </>
     );
 };
